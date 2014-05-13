@@ -9,7 +9,9 @@
 #  updated_at :datetime         not null
 #
 
-def User < ActiveRecord::Base
+class User < ActiveRecord::Base
+  has_many :recipes
+
   has_secure_password
 
   before_save { |user| user.email = email.downcase }
@@ -21,9 +23,7 @@ def User < ActiveRecord::Base
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
-
-  has_many :recipes
+  validates :password_confirmation, presence: true  
 
   private
     def create_remember_token

@@ -1,10 +1,10 @@
 CookBook::Application.routes.draw do
-  resource :recipes, :ingredients, :users, :sessions
+  resources :recipes, :ingredients, :users, :sessions
 
-  route to: 'recipes#index'
+  root to: 'recipes#index'
 
-  get '/signup', to: 'users/new'
-  delete '/signout', to: 'sessions/destroy'
-  get'/signin', to: 'sessions#new'
+  get '/signup', to: 'users#new'
+  delete '/signout', to: 'sessions#destroy', via: :delete
+  get '/signin', to: 'sessions#new'
 end
 
